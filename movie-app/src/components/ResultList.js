@@ -9,7 +9,7 @@ function ResultList(props) {
             if(response.data.Search)
                 setList(response.data.Search);
             //clean the list if the error is Too many results
-            if(response.data.Error=='Too many results.')
+            if(response.data.Error==='Too many results.')
                 setList([]);
         })
     },[props.searchFor]);
