@@ -12,23 +12,24 @@ function ResultList(props) {
                 setList(response.data.Search);
             //clean the list if the error is Too many results
             if(response.data.Error==='Too many results.')
-                setList([]);
-        })        
+                setList([]);    
+
+        })   
     },[props.searchFor]);
     
     return (
         <ListGroup>                
-            { list.map((element) => {
+            { list.map((element, index) => {
                 return (
                     <div>
-                        <ListGroup.Item key = {element.imdbID}>
-                            {element.Title}
-                            <Button 
+                        <ListGroup.Item key = {index}>
+                            {`${element.Title} (${element.Year}) `}
+                            <Button style={{marginLeft:'5px'}}
                                 variant='dark'
                                 size = 'sm'                                
                                 onClick = {props.onClick}
                             >
-                                My Favorite Movie
+                                Nominate
                             </Button>
                         </ListGroup.Item>
                         
