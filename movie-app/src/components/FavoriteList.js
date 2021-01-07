@@ -4,14 +4,14 @@ import ListGroup from "react-bootstrap/ListGroup";
 
 function FavoriteList(props) {
     const [list, setList] = useState([]);
-    const [listSize, setListSize] = useState(0);
+    // const [listSize, setListSize] = useState(0);
 
     useEffect(() =>{
         if(props.movie){
             let tempList = list;
             tempList.push(props.movie)
             setList(tempList);
-            setListSize(listSize+1);
+            // setListSize(listSize+1);
         }
     },[props.movie]);
 
