@@ -1,6 +1,5 @@
 import { useState, useEffect  } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import api from "../services/omdb-api";
 
 
 function FavoriteList(props) {
@@ -9,8 +8,10 @@ function FavoriteList(props) {
 
     useEffect(() =>{
         if(props.movie){
-            list.push(props.movie);
-            setListSize(listSize+1);
+            let tempList = list;
+            tempList.push(props.movie)
+            setList(tempList);
+            setListSize(listSize =>listSize+1);
         }
     },[props.movie]);
 
