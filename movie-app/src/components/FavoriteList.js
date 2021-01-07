@@ -11,7 +11,7 @@ function FavoriteList(props) {
             let tempList = list;
             tempList.push(props.movie)
             setList(tempList);
-            setListSize(listSize =>listSize+1);
+            setListSize(listSize+1);
         }
     },[props.movie]);
 
