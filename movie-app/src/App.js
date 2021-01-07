@@ -4,10 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchBox from './components/SearchBox';
 import ResultList from './components/ResultList';
 import {Container, Row, Col} from 'react-bootstrap'
+import FavoriteList from './components/FavoriteList';
 
 
 function App() {
   const [searchFor, setSearchFor] = useState('');
+  const [favMovie, setFavMovie] = useState();
+
   return (
     <Container className="App" fluid = 'md'>
       <header>
@@ -19,9 +22,14 @@ function App() {
       <Row xs = {1} md = {2}>
         <Col>
           Result List
-          <ResultList searchFor={searchFor} />           
+          <ResultList 
+            searchFor={searchFor} 
+            onClick = {(e) => setFavMovie(e.target.parentNode.childNodes[0].data) }
+          />           
         </Col>
-        <Col>List of Favorite Movies
+        <Col>
+           Favorite Movies List
+          <FavoriteList movie={favMovie}/>
         </Col>
       </Row>
 

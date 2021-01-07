@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import api from "../services/omdb-api";
 
+import Button from "react-bootstrap/Button";
+
 function ResultList(props) {
     const [list, setList] = useState([]);
     useEffect(() =>{
@@ -11,12 +13,27 @@ function ResultList(props) {
             //clean the list if the error is Too many results
             if(response.data.Error==='Too many results.')
                 setList([]);
-        })
+        })        
     },[props.searchFor]);
+    
     return (
         <ListGroup>                
             { list.map((element) => {
-                return <ListGroup.Item key = {element.imdbID}>{element.Title}</ListGroup.Item>;
+                return (
+                    <div>
+                        <ListGroup.Item key = {element.imdbID}>
+                            {element.Title}
+                            <Button 
+                                variant='dark'
+                                size = 'sm'                                
+                                onClick = {props.onClick}
+                            >
+                                My Favorite Movie
+                            </Button>
+                        </ListGroup.Item>
+                        
+                    </div>
+                );
             }) }
             
         </ListGroup>
