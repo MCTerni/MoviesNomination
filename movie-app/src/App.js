@@ -24,7 +24,7 @@ function App() {
           Result List
           <ResultList 
             searchFor={searchFor} 
-            onClick = {(e) => setFavMovie(e.target.parentNode.childNodes[0].data) }
+            onClick={ (e)=>setFavMovie(e.target.parentNode.childNodes[1].data) }
           />           
         </Col>
         <Col>

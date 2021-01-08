@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ListGroup, Button } from "react-bootstrap";
 import Toast from 'react-bootstrap/Toast'
+import ListItem from "./ListItem";
 
 function FavoriteList(props) {
     const [list, setList] = useState([]);
@@ -10,7 +11,7 @@ function FavoriteList(props) {
     useEffect(() => {
         if (props.movie && listSize < 5) {
             list.push(props.movie);
-            setListSize(list.length);
+            setListSize(prevSize => prevSize + 1);
         }
 
         if (list.length >= 5) {
@@ -20,7 +21,7 @@ function FavoriteList(props) {
 
     const handleRemove = (e) => {
         list.splice(e.target.parentNode.id, 1);
-        setListSize(listSize - 1);
+        setListSize(prevSize => prevSize - 1);
     }
 
     return (
@@ -33,8 +34,7 @@ function FavoriteList(props) {
             </Toast>
             <ListGroup>
                 {list.map((element, index) => {
-                    console.log(index)
-                    return (
+                    return (                                         
                         <div>
                             <ListGroup.Item id={index}>
                                 {element}
