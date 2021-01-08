@@ -9,15 +9,21 @@ function FavoriteList(props) {
     const [showToast, setShowToast] = useState(false);
 
     useEffect(() => {
-        if (props.movie && listSize < 5) {
-            list.push(props.movie);
+        if (props.title && listSize < 5) {
+
+            list.push({
+                Title: props.title,
+                Year: props.year,
+                imdbID: props.imdbId,
+                Poster: props.poster,
+            });
             setListSize(prevSize => prevSize + 1);
         }
 
         if (list.length >= 5) {
             setShowToast(true);
         }
-    }, [props.movie]);
+    }, [props.title]);
 
     const handleRemove = (e) => {
         list.splice(e.target.parentNode.id, 1);
@@ -34,18 +40,12 @@ function FavoriteList(props) {
             </Toast>
             <ListGroup>
                 {list.map((element, index) => {
-                    return (                                         
-                        <div>
-                            <ListGroup.Item id={index}>
-                                {element}
-                                <Button
-                                    style={{ marginLeft: "5px" }}
-                                    variant="dark"
-                                    size="sm"
-                                    onClick={handleRemove}
-                                >Remove</Button>
-                            </ListGroup.Item>
-                        </div>
+                    return (
+                        <ListItem key={index}
+                            movieInfo={element}
+                            onClick={handleRemove}
+                            btnText='Remove'
+                        />
                     );
                 })}
             </ListGroup>

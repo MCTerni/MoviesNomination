@@ -16,10 +16,14 @@ function ListItem(props) {
                 <img src={info.Poster} height='80rem' alt='No Poster   '/>
             </a>
             {`${info.Title} (${info.Year}) `}
-            <Button style={{ marginLeft: '5px' }}
+            <Button style={{ marginLeft: '5px' }} 
                 variant='dark'
                 size='sm'
                 onClick={props.onClick}
+                data-title={info.Title}
+                data-poster={info.Poster}
+                data-year={info.Year}
+                data-imdbID={info.imdbID}
             > {props.btnText} </Button>
         </ListGroupItem>
     )
