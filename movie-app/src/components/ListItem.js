@@ -1,29 +1,31 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Button from "react-bootstrap/Button";
 
 
+
 function ListItem(props) {
-    const [info, setInfo] = useState(props.movieInfo);
-    
-    useEffect(() =>{
-        setInfo(props.movieInfo);
-    },[props.movieInfo])
+    const [movieData, setMovieData] = useState(props.movieInfo);
+
+    useEffect(() => {
+        setMovieData(props.movieInfo);
+    }, [props.movieInfo])
 
     return (
         <ListGroupItem>
-            <a href={`https://www.imdb.com/title/${info.imdbID}`} target="_blank" >
-                <img src={info.Poster} height='80rem' alt='No Poster   '/>
+            <img src={movieData.poster} height='80rem' alt='No Poster   ' />
+            <a href={`https://www.imdb.com/title/${movieData.imdbID}`} target="_blank" >
+                {`${movieData.title} (${movieData.year}) `}
             </a>
-            {`${info.Title} (${info.Year}) `}
-            <Button style={{ marginLeft: '5px' }} 
+            <br />
+            <Button style={{ marginTop: '5px' }}
                 variant='dark'
                 size='sm'
                 onClick={props.onClick}
-                data-title={info.Title}
-                data-poster={info.Poster}
-                data-year={info.Year}
-                data-imdbID={info.imdbID}
+                data-title={movieData.title}
+                data-poster={movieData.poster}
+                data-year={movieData.year}
+                data-imdbID={movieData.imdbID}
             > {props.btnText} </Button>
         </ListGroupItem>
     )

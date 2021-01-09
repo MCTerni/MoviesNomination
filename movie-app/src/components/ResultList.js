@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
+import MovieData from "../models/MovieData";
 import api from "../services/omdb-api";
 import ListItem from './ListItem';
 
@@ -22,9 +23,9 @@ function ResultList(props) {
             { list.map((element, index) => {
                 return (
                     <ListItem key={index}
-                        movieInfo={element}
+                        movieInfo={new MovieData(element) }
                         onClick={props.onClick}
-                        btnText = 'Nominate'                        
+                        btnText = 'Nominate'
                     />
                 );
             })}

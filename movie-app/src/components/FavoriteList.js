@@ -1,29 +1,24 @@
 import { useState, useEffect } from "react";
-import { ListGroup, Button } from "react-bootstrap";
+import ListGroup from "react-bootstrap/ListGroup";
 import Toast from 'react-bootstrap/Toast'
 import ListItem from "./ListItem";
 
 function FavoriteList(props) {
-    const [list, setList] = useState([]);
+    const [list] = useState([]);
     const [listSize, setListSize] = useState(0);
     const [showToast, setShowToast] = useState(false);
 
     useEffect(() => {
-        if (props.title && listSize < 5) {
+        if (props.movie && listSize < 5) {
 
-            list.push({
-                Title: props.title,
-                Year: props.year,
-                imdbID: props.imdbId,
-                Poster: props.poster,
-            });
+            list.push(props.movie);
             setListSize(prevSize => prevSize + 1);
         }
 
         if (list.length >= 5) {
             setShowToast(true);
         }
-    }, [props.title]);
+    }, [props.movie]);
 
     const handleRemove = (e) => {
         list.splice(e.target.parentNode.id, 1);
