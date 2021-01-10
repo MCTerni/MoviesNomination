@@ -31,8 +31,9 @@
   float: left;
 }
 .btnItem {
-  position: relative;
-  top: 1.5rem;
+  position: absolute;  
+  top: 58%;
+  left: 48%;  
 }
 
 .mb-3 {
