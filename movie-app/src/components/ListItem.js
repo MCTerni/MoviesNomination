@@ -12,20 +12,20 @@ function ListItem(props) {
     }, [props.movieInfo])
 
     return (
-        <ListGroupItem>
-            <img src={movieData.poster} height='80rem' alt='No Poster   ' />
-            <a href={`https://www.imdb.com/title/${movieData.imdbID}`} target="_blank" >
+        <ListGroupItem id={props.id} >
+            <img src={movieData.poster} height='80rem' alt='No Poster   ' className='poster'/>
+            <a href={`https://www.imdb.com/title/${movieData.imdbID}`} target="_blank" rel="noreferrer">
                 {`${movieData.title} (${movieData.year}) `}
             </a>
             <br />
-            <Button style={{ marginTop: '5px' }}
+            <Button className='btnItem'
                 variant='dark'
                 size='sm'
                 onClick={props.onClick}
-                data-title={movieData.title}
-                data-poster={movieData.poster}
-                data-year={movieData.year}
-                data-imdbID={movieData.imdbID}
+                data-moviedata={JSON.stringify(movieData)}
+                disabled={props.btnDisabled}
+                
+
             > {props.btnText} </Button>
         </ListGroupItem>
     )

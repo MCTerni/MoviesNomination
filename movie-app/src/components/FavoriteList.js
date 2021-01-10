@@ -3,16 +3,21 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Toast from 'react-bootstrap/Toast'
 import ListItem from "./ListItem";
 
+
+const storagedMovieInfo = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
+
 function FavoriteList(props) {
-    const [list] = useState([]);
-    const [listSize, setListSize] = useState(0);
+
+    const [list] = useState(storagedMovieInfo||[]);
+    const [listSize, setListSize] = useState(storagedMovieInfo.length||0);
     const [showToast, setShowToast] = useState(false);
+    
 
     useEffect(() => {
         if (props.movie && listSize < 5) {
-
             list.push(props.movie);
             setListSize(prevSize => prevSize + 1);
+            localStorage.setItem('favoriteMovies',JSON.stringify(list));
         }
 
         if (list.length >= 5) {
@@ -20,9 +25,13 @@ function FavoriteList(props) {
         }
     }, [props.movie]);
 
+
     const handleRemove = (e) => {
         list.splice(e.target.parentNode.id, 1);
-        setListSize(prevSize => prevSize - 1);
+        setListSize(prevSize => prevSize - 1); 
+        localStorage.setItem('favoriteMovies',JSON.stringify(list));
+
+        
     }
 
     return (
@@ -33,13 +42,14 @@ function FavoriteList(props) {
                     <strong>You've just added 5 movies to your list</strong>
                 </Toast.Header>
             </Toast>
-            <ListGroup>
+            <ListGroup >
                 {list.map((element, index) => {
                     return (
-                        <ListItem key={index}
+                        <ListItem id={index}
                             movieInfo={element}
                             onClick={handleRemove}
                             btnText='Remove'
+                            btnDisabled = {false}
                         />
                     );
                 })}

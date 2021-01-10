@@ -1,17 +1,31 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchBox from './components/SearchBox';
 import ResultList from './components/ResultList';
 import { Container, Row, Col } from 'react-bootstrap'
 import FavoriteList from './components/FavoriteList';
-import MovieData from './models/MovieData';
 import "./styles/custom.css"
 
 
 function App() {
+
   const [searchFor, setSearchFor] = useState('');
   const [movieData, setMovieData] = useState();
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
+
+
+  useEffect(() => {
+    try {
+      setFavoriteMovies(JSON.parse(localStorage.getItem('favoriteMovies')))
+    }
+    catch {
+      setFavoriteMovies([])
+    }
+  },
+    [movieData, searchFor]);
+
+
 
   return (
     <div className="App">
@@ -23,38 +37,29 @@ function App() {
           <SearchBox onChange={(e) => setSearchFor(e.target.value)} />
         </div>
         <Row xs={1} md={2}>
-          <div>
+          <Container>
             <Col className="list-block">
               <h3 className="list-header">Result List</h3>
-              <div className="list">
-                <ResultList
+              <div>
+                <ResultList id="result-list"
                   searchFor={searchFor}
                   //onClick={ (e)=>setFavMovie(e.target.parentNode.childNodes[1].data) }
-                  onClick={(e) => {
-                    console.log(e.target)
-                    e.target.disabled = true;
-                    setMovieData(new MovieData({
-                      Title: e.target.dataset.title,
-                      Year: e.target.dataset.year,
-                      imdbID: e.target.dataset.imdbID,
-                      Poster: e.target.dataset.poster,
-                    })
-                    )
-                  }}
+                  onClick={(e) => setMovieData(JSON.parse(e.target.dataset.moviedata))}
+                  favoriteMovies={favoriteMovies}
                 />
               </div>
             </Col>
-          </div>
-          <div>
+          </Container>
+          <Container>
             <Col className="list-block">
               <h3 className="list-header">Favorite Movies List</h3>
-              <div className="list">
-                <FavoriteList
+              <Container>
+                <FavoriteList 
                   movie={movieData}
                 />
-              </div>
+              </Container >
             </Col>
-          </div>
+          </Container>
         </Row>
       </Container>
     </div>
