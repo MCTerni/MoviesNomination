@@ -21,7 +21,7 @@ function ResultList(props) {
 
         //update favoriteImdbIDs
         try {
-            favoriteImdbIDs.splice(0,favoriteImdbIDs.length);
+            favoriteImdbIDs.splice(0, favoriteImdbIDs.length);
             props.favoriteMovies.forEach(e => {
                 favoriteImdbIDs.push(e.imdbID)
             });
@@ -42,7 +42,6 @@ function ResultList(props) {
                     />
                 );
             })}
-
         </ListGroup>
     );
 }

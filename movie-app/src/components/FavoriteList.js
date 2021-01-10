@@ -8,16 +8,15 @@ const storagedMovieInfo = JSON.parse(localStorage.getItem('favoriteMovies')) || 
 
 function FavoriteList(props) {
 
-    const [list] = useState(storagedMovieInfo||[]);
-    const [listSize, setListSize] = useState(storagedMovieInfo.length||0);
+    const [list] = useState(storagedMovieInfo || []);
+    const [listSize, setListSize] = useState(storagedMovieInfo.length || 0);
     const [showToast, setShowToast] = useState(false);
-    
 
     useEffect(() => {
         if (props.movie && listSize < 5) {
             list.push(props.movie);
             setListSize(prevSize => prevSize + 1);
-            localStorage.setItem('favoriteMovies',JSON.stringify(list));
+            localStorage.setItem('favoriteMovies', JSON.stringify(list));
         }
 
         if (list.length >= 5) {
@@ -25,13 +24,10 @@ function FavoriteList(props) {
         }
     }, [props.movie]);
 
-
     const handleRemove = (e) => {
         list.splice(e.target.parentNode.id, 1);
-        setListSize(prevSize => prevSize - 1); 
-        localStorage.setItem('favoriteMovies',JSON.stringify(list));
-
-        
+        setListSize(prevSize => prevSize - 1);
+        localStorage.setItem('favoriteMovies', JSON.stringify(list));
     }
 
     return (
@@ -49,7 +45,7 @@ function FavoriteList(props) {
                             movieInfo={element}
                             onClick={handleRemove}
                             btnText='Remove'
-                            btnDisabled = {false}
+                            btnDisabled={false}
                         />
                     );
                 })}

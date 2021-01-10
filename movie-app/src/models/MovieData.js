@@ -5,5 +5,4 @@ export default class MovieData {
         this.imdbID = jsonData.imdbID;
         this.poster = jsonData.Poster;
     }
-
 }
