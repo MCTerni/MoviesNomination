@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { useTranslation } from 'react-i18next';
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SearchBox from "./components/SearchBox";
 import ResultList from "./components/ResultList";
-import { Container, Row, Col } from "react-bootstrap";
 import FavoriteList from "./components/FavoriteList";
+import LanguagesDropDown from "./components/LanguagesDropDown";
 import "./styles/custom.css";
 
 function App() {
   const [searchFor, setSearchFor] = useState("");
   const [movieData, setMovieData] = useState();
   const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     try {
@@ -23,14 +26,20 @@ function App() {
   return (
     <div className="App">
       <Container fluid="md">
-        <header className="header">The Shoppies</header>
+        <header className="header">
+          {t('The Shoppies')}
+          <div className="langDropDown">
+            {t('Select Language')}
+            <LanguagesDropDown />
+          </div>
+        </header>
         <div className="serch-box">
           <SearchBox onChange={(e) => setSearchFor(e.target.value)} />
         </div>
         <Row xs={1} md={2} className="lists">
           <Container>
             <Col className="list-block">
-              <h3 className="list-header">Nominations</h3>
+              <h3 className="list-header">{t('Nominations')}</h3>
               <Container>
                 <FavoriteList movie={movieData} />
               </Container>
@@ -38,7 +47,7 @@ function App() {
           </Container>
           <Container>
             <Col className="list-block">
-              <h3 className="list-header">Results for "{searchFor}"</h3>
+              <h3 className="list-header">{t('Results for')} "{searchFor}"</h3>
               <div>
                 <ResultList
                   id="result-list"

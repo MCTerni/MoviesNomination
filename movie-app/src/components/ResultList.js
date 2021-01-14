@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import MovieData from "../models/MovieData";
 import api from "../services/omdb-api";
+import { useTranslation } from 'react-i18next';
 import ListItem from './ListItem';
 
 
 function ResultList(props) {
     const [list, setList] = useState([]);
     const [favoriteImdbIDs, setFavoriteImdbIDs] = useState([]);
+    const {t, i18n} = useTranslation();
 
     useEffect(() => {
         api.get(props.searchFor).then(response => {
@@ -37,7 +39,7 @@ function ResultList(props) {
                     <ListItem id={index}
                         movieInfo={new MovieData(element)}
                         onClick={props.onClick}
-                        btnText='Nominate'
+                        btnText={t('Nominate')}
                         btnDisabled={favoriteImdbIDs.includes(element.imdbID)}
                     />
                 );

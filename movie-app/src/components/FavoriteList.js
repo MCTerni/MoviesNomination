@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import Toast from 'react-bootstrap/Toast'
+import { useTranslation } from 'react-i18next';
 import ListItem from "./ListItem";
+
 
 
 const storagedMovieInfo = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
@@ -11,6 +13,8 @@ function FavoriteList(props) {
     const [list] = useState(storagedMovieInfo || []);
     const [listSize, setListSize] = useState(storagedMovieInfo.length || 0);
     const [showToast, setShowToast] = useState(false);
+    const {t, i18n} = useTranslation();
+    
 
     useEffect(() => {
         if (props.movie && listSize < 5) {
@@ -35,7 +39,7 @@ function FavoriteList(props) {
             <Toast onClose={() => setShowToast(false)} show={showToast} delay={5000} autohide>
                 <Toast.Header>
                     <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-                    <strong>You've just added 5 movies to your list</strong>
+                    <strong>{t("You've added 5 movies to your list")}</strong>
                 </Toast.Header>
             </Toast>
             <ListGroup >
@@ -44,7 +48,7 @@ function FavoriteList(props) {
                         <ListItem id={index}
                             movieInfo={element}
                             onClick={handleRemove}
-                            btnText='Remove'
+                            btnText={t('Remove')}
                             btnDisabled={false}
                         />
                     );
