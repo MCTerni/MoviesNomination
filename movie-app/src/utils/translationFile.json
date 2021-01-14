@@ -6,6 +6,7 @@
             "Nominations":"Nominations",
             "Remove":"Remove",
             "Results for":"Results for",
+            "Select Language":"Select a Language",
             "The Shoppies": "The Shoppies",
             "You've added 5 movies to your list": "You've added 5 movies to your list"
         }
@@ -17,6 +18,7 @@
             "Nominations":"Nominations",
             "Remove":"Retirer",
             "Results for":"Résultats de",
+            "Select Language": "Sélectionnez une langue: ",
             "The Shoppies": "Les Shoppies",
             "You've added 5 movies to your list": "Vous avez ajouté 5 films à votre liste"
         }
